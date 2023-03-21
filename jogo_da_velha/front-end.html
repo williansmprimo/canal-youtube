@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>Jogo da Velha!</title>
+  </head>
+  <style>
+    #grid{
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button{
+      width: 100px;
+      height: 100px;
+      font-size: 45px;
+    }
+    body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+  <body>
+    <div id="grid"></div>
+    <h1 id="result">Sua vez!</h1>
+    <script>
+      let grid, result;
+      let state = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+      window.onload = function (){
+        grid = document.getElementById("grid")
+        result = document.getElementById("result")
+        render()
+      }
+      
+      function render(){
+        let buttons = ''
+        for(let i = 0; i < 9; i++){
+          buttons += ("<button onclick='cliked(" + i + ")'>" + state[i] + "</button>")
+        }
+        grid.innerHTML = buttons
+      }
+      
+      function cliked(i){
+        if(state[i] !== ' ')return;
+        state[i] = 'x';
+        f_state = state.reduce((a, i) => a + "state=" + i + "&", "")
+        fetch("http://localhost:8081/?" + f_state)
+          .then(response => response.json())
+          .then((data) => {
+             if(data.nextPosition !== -1){
+               state[data.nextPosition] = 'o';
+             }
+             result.innerHTML = data.message;
+          render()
+        });
+      }
+    </script>
+  </body>
+</html>
+<!-- python3 -m http.server 8080 -->
