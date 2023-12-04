@@ -1,0 +1,3 @@
+docker run -d -p 27017:27017 --name test-mongo mongo:latest
+docker run -d -p 3000:3000 --name api-contatos api-contatos
+docker build --tag api-contatos .
