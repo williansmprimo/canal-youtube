@@ -1,0 +1,24 @@
+
+<div>
+    <p-card class="card-cadastro" header="Cadastro">
+        <p-messages [(value)]="messages" [closable]="false"></p-messages>
+        <form (ngSubmit)="salvar()" class="ui-fluid m-3">
+            <div class="ui-fluid">
+                <span class="p-float-label">
+                    <input pInputText name="nome" [(ngModel)]="nome" />
+                    <label for="nome">Seu nome</label>
+                </span>
+                <br />
+                <span class="p-float-label">
+                    <input pInputText name="telefone" [(ngModel)]="telefone" />
+                    <label for="telefone">Seu telefone</label>
+                </span>
+                <br />
+                <span class="p-float-label">
+                    <p-button type="submit">Salvar</p-button>
+                </span>
+            </div>
+        </form>
+    </p-card>
+    
+</div>

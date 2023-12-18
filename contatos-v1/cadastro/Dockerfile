@@ -1,19 +1,21 @@
-FROM node:18
+FROM node:21 as build 
 
-# Create app directory
-WORKDIR adeus-filas-api/usr/src/app
+WORKDIR /usr/local/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY adeus-filas-api/package*.json ./
+COPY . .
 
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --omit=dev
 
-# Bundle app source
-COPY ./adeus-filas-api .
+RUN npm run build
 
-EXPOSE 8080
-CMD [ "node", "index.js" ]
+FROM nginx
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=build /usr/local/app/dist/cadastro/browser .
+
+EXPOSE 8081
+
+CMD nginx -g 'daemon off;'

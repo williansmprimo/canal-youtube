@@ -1,0 +1,13 @@
+#FRONT
+npm install -g @angular/cli
+npm install next@latest react@latest react-dom@latest
+npm start
+docker build --tag cadastro .
+docker run -d -p 8081:8081 --network contatos --name cadastro cadastro
+
+#API
+docker network create contatos
+docker run -d --network contatos --name db-mongo mongo:latest
+docker run -d -p 3001:3001 --network contatos --name api-contatos api-contatos
+docker build --tag api-contatos .
+docker rm $(docker ps -qa)

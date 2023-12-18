@@ -1,11 +1,13 @@
 express = require('express');
 mogoose = require('mongoose');
+cors = require('cors');
 app = express();
+app.use(cors({origin: '*'}));
 app.use(express.json());
 Contato = require('./contato');
 
 // mogoose.connect('mongodb://127.0.0.0:27017');
-mogoose.connect('mongodb://db-mongo:27017');
+mogoose.connect('mongodb://db-mongo:27017/contatos');
 
 app.get('/contatos', async (req, res) => {
     console.log('get on /contatos');
@@ -32,6 +34,6 @@ app.post('/contatos', async (req, res) => {
     res.status(200).send(contato);
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('Server UP...');
 });
