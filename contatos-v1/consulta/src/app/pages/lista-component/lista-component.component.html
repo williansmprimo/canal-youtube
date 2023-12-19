@@ -1,0 +1,20 @@
+<div>
+    <p-card class="card-lista" header="Consulta">
+        <p-table [value]="listaContatos" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.nome }}</td>
+                    <td>{{ product.telefone }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+</div>

@@ -4,6 +4,8 @@ npm install next@latest react@latest react-dom@latest
 npm start
 docker build --tag cadastro .
 docker run -d -p 8081:8081 --network contatos --name cadastro cadastro
+docker build --tag consulta .
+docker run -d -p 8082:8082 --network contatos --name consulta consulta
 
 #API
 docker network create contatos
