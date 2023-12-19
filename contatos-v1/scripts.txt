@@ -22,3 +22,16 @@ docker logs
 docker stop $(docker ps -qa)
 docker tag image_id myapp:0.0.1
 docker image prune --all --force
+
+01 -> docker network create contatos
+#Sequência 01:
+docker run -d --network contatos --name db-mongo mongo:latest
+docker run -d -p 3001:3001 --network contatos --name api-contatos api-contatos
+docker run -d -p 8081:8081 --network contatos --name cadastro cadastro
+docker run -d -p 8082:8082 --network contatos --name consulta consulta
+
+#Sequência 02:
+docker run -d --network contatos --name db-mongo mongo:latest
+docker run -d -p 3001:3001 --network contatos --name api-contatos williansmprimo/api-contatos:0.0.1
+docker run -d -p 8081:8081 --network contatos --name cadastro williansmprimo/cadastro:0.0.1
+docker run -d -p 8082:8082 --network contatos --name consulta williansmprimo/consulta:0.0.1
