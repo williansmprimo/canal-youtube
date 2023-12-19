@@ -30,7 +30,7 @@ export class CadastroComponent {
 
   salvar(){
     const contato: Contato = {
-      id: 0,
+      id: Math.random() * 1000, // ID aleatório, por simplicidade
       nome: this.nome,
       telefone: this.telefone
     };

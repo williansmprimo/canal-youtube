@@ -9,7 +9,16 @@ docker run -d -p 8082:8082 --network contatos --name consulta consulta
 
 #API
 docker network create contatos
-docker run -d --network contatos --name db-mongo mongo:latest
+docker run -d --network contatos --name db-mongo mongo:latest (ou 5.0.23)
 docker run -d -p 3001:3001 --network contatos --name api-contatos api-contatos
 docker build --tag api-contatos .
 docker rm $(docker ps -qa)
+
+#Outros comandos
+docker login registry-1.docker.io
+docker login -u <your-username>
+docker system prone --all
+docker logs
+docker stop $(docker ps -qa)
+docker tag image_id myapp:0.0.1
+docker image prune --all --force
